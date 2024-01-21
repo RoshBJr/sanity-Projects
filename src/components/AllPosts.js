@@ -27,22 +27,21 @@ export default function AllPosts() {
 
   return (
     <div className="bg-green-100 min-h-screen p-12">
-      <div className="container mx-auto">
+      <div className="mx-auto w-full">
         <h2 className="text-5xl flex justify-center cursive">Blog Posts</h2>
         <h3 className="text-lg text-gray-600 flex justify-center mb-12">
           Welcome to my blog posts page!
         </h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
           {allPostsData &&
             allPostsData.map((post, index) => (
               <Link to={"/" + post.slug.current} key={post.slug.current}>
                 <span
-                  className="block h-64 relative rounded shadow leading-snug bg-white
-                      border-l-8 border-green-400"
+                  className="block h-64 relative rounded shadow leading-snug bg-white"
                   key={index}
                 >
                   <img
-                    className="w-full h-full rounded-r absolute object-cover"
+                    className="w-full h-full rounded-r object-top absolute object-cover"
                     src={post.mainImage.asset.url}
                     alt=""
                   />
