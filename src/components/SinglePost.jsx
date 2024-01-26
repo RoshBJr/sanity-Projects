@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 export default function SinglePost(props) {
     return(
-        <Link className="" to={"/" + props.slug} key={props.slug}>
+        <Link className="transform z-50 hover:shadow-2xl duration-500 hover:-rotate-3" to={"/" + props.slug} key={props.slug}>
             <span
-                className="block h-64 relative rounded shadow leading-snug bg-white"
+                className="overflow-hidden  block h-64 relative rounded shadow leading-snug bg-white"
                 key={props.index}
             >
                 <img
-                className="rounded-lg w-full h-full object-top absolute object-cover"
+                className="rounded-lg object-cover object-top absolute h-full w-full"
                 src={props.imgUrl}
                 alt=""
                 />

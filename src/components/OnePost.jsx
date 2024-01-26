@@ -43,7 +43,7 @@ export default function OnePost() {
       <div className="container shadow-lg mx-auto bg-green-100 rounded-lg">
         <div className="relative">
           <div className="absolute h-full w-full flex items-center justify-center p-8">
-            <div className="absolute bg-white bg-opacity-75 rounded top-0 left-0 ml-5 mt-5">
+            <div className="hover:bg-red-100 duration-200 absolute bg-white bg-opacity-75 rounded top-0 left-0 ml-5 mt-5">
               <a href="/" className="cursive flex items-center p-2 text-2xl">
                 Go Back
               </a>
