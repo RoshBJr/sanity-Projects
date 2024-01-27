@@ -25,7 +25,11 @@ export default function Filter(props) {
         props.setDisplayPosts([]);
 
         if(e.target.id == "All") {
-            return props.setDisplayPosts(props.allPostsData);
+            return (
+                setTimeout(() => {
+                    props.setDisplayPosts(props.allPostsData);
+                }, 300)
+            );
         }
 
         const filteredData = props.allPostsData.filter(

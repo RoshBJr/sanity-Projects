@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function SinglePost(props) {
     return(
+        <motion.div className="hover:shadow-2xl duration-100" whileHover={{rotate: -3}}>
         <Link className="hover:shadow-2xl duration-500 hover:-rotate-3" to={"/" + props.slug} key={props.slug}>
             <span
                 className=" pointer-events-none overflow-hidden  block h-64 relative rounded shadow leading-snug bg-white"
@@ -25,5 +27,6 @@ export default function SinglePost(props) {
                 </span>
             </span>
         </Link>
+        </motion.div>
     );
 }
