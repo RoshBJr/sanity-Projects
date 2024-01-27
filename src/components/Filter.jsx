@@ -4,7 +4,7 @@ import './Filter.css';
 
 export default function Filter(props) {
     const [categories, setCategories] = useState(null);
-    const [activeCat, setActiveCat] = useState("all");
+    const [activeCat, setActiveCat] = useState("All");
     const catRef = useRef(null);
 
     useEffect(() => {
@@ -15,16 +15,25 @@ export default function Filter(props) {
             }`
         ).then(data => {
             setCategories(data);
-            setActiveCat(data[0]._id);
         }).catch(console.error);
     }, []);
 
 
     const changeCat = (e) => {
+        if(e.target.id == activeCat) return;
         setActiveCat(e.target.id);
+        props.setDisplayPosts([]);
+
+        if(e.target.id == "All") {
+            return props.setDisplayPosts(props.allPostsData);
+        }
+
+        const filteredData = props.allPostsData.filter(
+            post => post.categories.includes(e.target.id)
+        );
         setTimeout(()=> {
-            props.setCat(e.target.id);
-        }, 400);
+            props.setDisplayPosts(filteredData);
+        }, 300);
     }
     return(
         <>
@@ -33,8 +42,8 @@ export default function Filter(props) {
             </h3>
             <ul role="list" className={`px-2 py-3 font-medium text-gray-900 select-none flex`}>
                 {categories && categories.map((category) => (
-                    <span key={category._id}  ref={catRef} onClick={changeCat} className={`${category._id == activeCat ? 'active': ''} hover:bg-red-700 hover:text-white w-40 text-center duration-500 rounded cursor-pointer`}>
-                        <a id={category._id} className="cursive block px-2 py-3 text-2xl">
+                    <span key={category._id}  ref={catRef} onClick={changeCat} className={`${category.title == activeCat ? 'active': ''} hover:bg-red-700 hover:text-white w-40 text-center duration-500 rounded cursor-pointer`}>
+                        <a id={category.title} className="cursive block px-2 py-3 text-2xl">
                             {category.title}
                         </a>
                     </span>

@@ -6,46 +6,17 @@ import Filter from "./Filter.jsx";
 import SinglePost from "./SinglePost.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2
-    }
-  }
-};
-  
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1
-  }
-};
-
 export default function AllPosts() {
   const [allPostsData, setAllPosts] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [displayPosts, setDisplayPosts] = useState(null);
 
   useEffect(() => {
-    sanityClient.fetch(
-      `*[_type == "category"]| order(title){
-          _id,
-          title
-      }`
-  ).then(data => {
-      setCategory(data[0]._id);
-  }).catch(console.error);
-
     sanityClient
       .fetch(
         `*[_type == "post"]{
         title,
         slug,
-        "categories": categories[]->_id,
+        "categories": categories[]->title,
         mainImage{
         asset->{
           _id,
@@ -56,14 +27,18 @@ export default function AllPosts() {
       )
       .then((data) => {
         setAllPosts(data);
+        setDisplayPosts(data);
       })
       .catch(console.error);
   }, []);
   
-  function singlePost(post, index) {
-    
-    return <motion.div className="" exit={{scale: 0}} key={`${index}`} initial={{  rotate: 180, scale: 0 }}
-    animate={{ rotate: 0, scale: 1}} transition={{ease: "easeInOut", duration: .4, bounce: "spring"}}
+  const singlePost = (post, index) => {
+    return (<motion.div
+    exit={{scale: 0}} 
+    key={`${index}`} 
+    initial={{  rotate: 180, scale: 0 }}
+    animate={{ rotate: 0, scale: 1}} 
+    transition={{ease: "easeInOut", duration: .3, bounce: "spring"}}
     >
       <SinglePost
         slug={ post.slug.current}
@@ -71,7 +46,7 @@ export default function AllPosts() {
         imgUrl={post.mainImage.asset.url}
         title={post.title}
       />
-    </motion.div>
+    </motion.div>);
   }
 
   return (
@@ -83,19 +58,20 @@ export default function AllPosts() {
         <h3 className="text-xl text-gray-600 flex justify-center mb-12">
           Welcome and read about these intriguing Characters!
         </h3>
-        <Filter setCat={setCategory}/>
+        <Filter 
+          allPostsData={allPostsData}
+          setDisplayPosts={setDisplayPosts}
+        />
           <div
             className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
             <AnimatePresence>
-              {allPostsData &&
-                allPostsData.map((post, index) => (
-                  post.categories.includes(category)
-                  ?
-                  singlePost(post,index)
-                  :
-                  ""
-                ))}
-              </AnimatePresence>
+              {
+                displayPosts && 
+                displayPosts.map((post, index) => {
+                  return singlePost(post,index)
+                })
+              }
+            </AnimatePresence>
           </div>
 
       </div>
