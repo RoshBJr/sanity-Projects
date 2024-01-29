@@ -34,7 +34,7 @@ export default function AllPosts() {
   
   const singlePost = (post, index) => {
     return (<motion.div
-    exit={{scale: 0}} 
+    exit={{scale: 0, rotate: -180}} 
     key={`${index}`} 
     initial={{  rotate: 180, scale: 0 }}
     animate={{ rotate: 0, scale: 1}} 

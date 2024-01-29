@@ -6,6 +6,7 @@ import {sanityClient} from "../client.js";
 import BlockContent from "@sanity/block-content-to-react";
 import imageUrlBuilder from "@sanity/image-url";
 import { AnimatePresence, motion } from "framer-motion";
+import SinglePost from "./SinglePost.jsx";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -22,6 +23,15 @@ export default function OnePost() {
         `*[slug.current == "${slug}"]{
            title,
            slug,
+           relatedPosts[]->{
+            title,
+            slug,
+            mainImage {
+              asset-> {
+                url
+              }
+            }
+           },
            mainImage{
            asset->{
               _id,
@@ -62,6 +72,18 @@ export default function OnePost() {
 
   const scrollPos = useScrollPos();
 
+  function singlePost(post, index) {
+    return(
+      <SinglePost
+        key={index}
+        slug={ post.slug.current}
+        index={index}
+        imgUrl={post.mainImage.asset.url}
+        title={post.title}
+      />
+    )
+  }
+
   if (!postData) return <div>Loading...</div>;
 
   return (
@@ -70,7 +92,7 @@ export default function OnePost() {
         <AnimatePresence>
           <motion.div
             onClick={scrollTop}
-            className={`cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded hover:bg-gray-700 hover:duration-200`}>
+            className={`z-50 cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded hover:bg-gray-700 hover:duration-200`}>
               <span className="cursive text-xl text-white">Top</span>
           </motion.div>
         </AnimatePresence> 
@@ -113,6 +135,16 @@ export default function OnePost() {
             dataset={sanityClient.dataset}
           />
         </div>
+      </div>
+        <h2>Related Posts</h2>
+      <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
+        {
+          postData.relatedPosts.map((post, index) => {
+            return(
+              singlePost(post, index)
+            )
+          })
+        }
       </div>
     </div>
   );

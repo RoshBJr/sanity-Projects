@@ -2,15 +2,25 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function SinglePost(props) {
+
+    const scrollTop = () => {
+        let scrlIterator = 0;
+        let intId = setInterval(() => {
+          if(window.scrollY == 0) return window.clearInterval(intId)
+          scrlIterator++;
+          window.scrollBy(0, -scrlIterator)
+        }, 5)
+      }
+
     return(
-        <motion.div className="hover:shadow-2xl duration-100" whileHover={{rotate: -3}}>
-        <Link className="hover:shadow-2xl duration-500 hover:-rotate-3" to={"/" + props.slug} key={props.slug}>
+        <motion.div onClick={scrollTop} className="hover:shadow-2xl duration-100" whileHover={{rotate: -3}}>
+        <Link className="" to={"/" + props.slug} key={props.slug}>
             <span
-                className=" pointer-events-none overflow-hidden  block h-64 relative rounded shadow leading-snug bg-white"
+                className="rounded-xl overflow-hidden  block h-64 relative shadow leading-snug bg-white"
                 key={props.index}
             >
-                <img
-                className="pointer-events-none rounded-lg object-cover object-top absolute h-full w-full"
+            <img
+                className="transform hover:scale-110 duration-300 object-cover object-top absolute h-full w-full"
                 src={props.imgUrl}
                 alt=""
                 />
