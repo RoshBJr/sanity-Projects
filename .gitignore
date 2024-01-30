@@ -10,7 +10,6 @@
 
 # production
 /build
-/src/client.js
 # misc
 .DS_Store
 .env.local
