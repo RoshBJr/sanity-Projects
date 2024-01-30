@@ -19,8 +19,9 @@ export default function SinglePost(props) {
                 className="rounded-xl overflow-hidden  block h-64 relative shadow leading-snug bg-white"
                 key={props.index}
             >
-            <img
-                className="transform hover:scale-110 duration-300 object-cover object-top absolute h-full w-full"
+            <motion.img
+            whileHover={{scale: 1.1}}
+                className=" duration-300 object-cover object-top absolute h-full w-full"
                 src={props.imgUrl}
                 alt=""
                 />
