@@ -80,7 +80,7 @@ export default function AllPosts() {
         <AnimatePresence>
           <motion.div
             onClick={scrollTop}
-            className={`z-50 cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded hover:bg-gray-700 hover:duration-200`}>
+            className={`z-50 cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded md:hover:bg-gray-700 hover:duration-200`}>
               <span className="cursive text-xl text-white">Top</span>
           </motion.div>
         </AnimatePresence> 

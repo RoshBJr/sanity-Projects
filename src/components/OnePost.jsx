@@ -87,12 +87,12 @@ export default function OnePost() {
   if (!postData) return <div>Loading...</div>;
 
   return (
-    <div className="bg-gray-200 min-h-screen p-12">
+    <div className="bg-gray-200 min-h-screen p-5 lg:p-12">
       {
         <AnimatePresence>
           <motion.div
             onClick={scrollTop}
-            className={`z-50 cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded hover:bg-gray-700 hover:duration-200`}>
+            className={`z-50 cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded md:hover:bg-gray-700 hover:duration-200`}>
               <span className="cursive text-xl text-white">Top</span>
           </motion.div>
         </AnimatePresence> 
@@ -105,7 +105,7 @@ export default function OnePost() {
                 Go Back
               </a>
             </div>
-            <div className="bg-white bg-opacity-75 rounded p-12">
+            <div className="bg-white bg-opacity-75 rounded lg:p-12 p-6">
               <h2 className="cursive text-4xl text-center lg:text-6xl mb-4">
                 {postData.title}
               </h2>
@@ -128,7 +128,7 @@ export default function OnePost() {
             style={{ height: "400px" }}
           />
         </div>
-        <div className="px-16 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full">
+        <div className="lg:px-16 px-8 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full">
           <BlockContent
             blocks={postData.body}
             projectId={sanityClient.projectId}
