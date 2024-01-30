@@ -49,13 +49,47 @@ export default function AllPosts() {
     </motion.div>);
   }
 
+  const useScrollPos = () => {
+    const [scrollPos, setScrollPos] = useState(0);
+
+    useEffect(() => {
+      const updatePos = () => {
+        setScrollPos(window.scrollY);
+      }
+      window.addEventListener("scroll", updatePos);
+
+      return () => window.removeEventListener("scroll", updatePos);
+    },[]);
+    return scrollPos;
+  }
+
+  const scrollTop = () => {
+    let scrlIterator = 0;
+    let intId = setInterval(() => {
+      if(window.scrollY == 0) return window.clearInterval(intId)
+      scrlIterator++;
+      window.scrollBy(0, -scrlIterator)
+    }, 5)
+  }
+
+  const scrollPos = useScrollPos();
+
+
   return (
     <div className="bg-green-100 min-h-screen p-12">
+        <AnimatePresence>
+          <motion.div
+            onClick={scrollTop}
+            className={`z-50 cursor-pointer transform ${scrollPos >= 480 ? 'scale-1': 'scale-0'} duration-100 fixed right-0 bottom-0 mb-10 mr-10 p-5 bg-black rounded hover:bg-gray-700 hover:duration-200`}>
+              <span className="cursive text-xl text-white">Top</span>
+          </motion.div>
+        </AnimatePresence> 
+
       <div className="mx-auto w-full">
         <h2 className="text-5xl flex justify-center cursive">
           Historical Figures
         </h2>
-        <h3 className="text-xl text-gray-600 flex justify-center mb-12">
+        <h3 className="mt-5 text-center text-xl text-gray-600 flex justify-center mb-12">
           Welcome and read about these intriguing Characters!
         </h3>
         <Filter 

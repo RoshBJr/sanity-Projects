@@ -41,7 +41,7 @@ export default function Filter(props) {
     }
     return(
         <>
-            <h3 className="cursive text-4xl cursor-default select-none w-40 text-center rounded">
+            <h3 className="px-2 cursive text-4xl cursor-default select-none w-40 text-start rounded">
                 Categories
             </h3>
             <ul role="list" className={`px-2 py-3 font-medium text-gray-900 select-none flex`}>

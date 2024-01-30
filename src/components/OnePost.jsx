@@ -106,7 +106,7 @@ export default function OnePost() {
               </a>
             </div>
             <div className="bg-white bg-opacity-75 rounded p-12">
-              <h2 className="cursive text-3xl lg:text-6xl mb-4">
+              <h2 className="cursive text-4xl text-center lg:text-6xl mb-4">
                 {postData.title}
               </h2>
               <div className="flex justify-center text-gray-800">
@@ -136,8 +136,8 @@ export default function OnePost() {
           />
         </div>
       </div>
-        <h2>Related Posts</h2>
-      <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
+        <h2 className="container m-auto mt-20 cursive text-5xl lg:text-6xl">Related Posts</h2>
+      <div className="ml-auto mr-auto container mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
         {
           postData.relatedPosts.map((post, index) => {
             return(
